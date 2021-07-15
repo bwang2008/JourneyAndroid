@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="list_margin">8dp</dimen>
+    <dimen name="list_left_margin">10dp</dimen>
+    <dimen name="id_txt_size">20sp</dimen>
+    <dimen name="title_txt_size">16sp</dimen>
+</resources>
