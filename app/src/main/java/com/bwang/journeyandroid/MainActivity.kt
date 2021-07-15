@@ -2,7 +2,6 @@ package com.bwang.journeyandroid
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.autofill.TextValueSanitizer
 import android.util.Log
 import android.widget.TextView
 import com.bwang.journeyandroid.data.JourneyDTOItem
