@@ -1,4 +1,4 @@
-package com.bwang.journeyandroid
+package com.bwang.journeyandroid.repository
 
 import com.bwang.journeyandroid.data.JourneyDTOItem
 import retrofit2.Call

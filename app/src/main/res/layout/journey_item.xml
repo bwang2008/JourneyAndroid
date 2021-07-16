@@ -16,42 +16,46 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            
-        <ImageView
-            android:id="@+id/imageItem"
-            android:src="@mipmap/ic_launcher"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_height="match_parent"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/imageItem"
+                android:layout_width="@dimen/list_thumb_width"
+                android:layout_height="@dimen/list_thumb_height"
+                android:contentDescription="@string/item_image"
+                android:src="@mipmap/ic_launcher" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/list_left_margin"
                 android:gravity="center"
-                android:layout_marginLeft="@dimen/list_left_margin">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/userId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
+                    android:layout_gravity="start"
                     android:textColor="@color/black"
                     android:textSize="@dimen/id_txt_size"
-                    tools:text="User Id"/>
+                    android:textStyle="bold"
+                    tools:text="User Id" />
+
                 <TextView
                     android:id="@+id/title"
-                    android:textColor="@color/black"
-                    android:textStyle="normal"
-                    android:textSize="@dimen/title_txt_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Title"/>
+                    android:layout_gravity="start"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/title_txt_size"
+                    android:textStyle="normal"
+                    tools:text="Title" />
             </LinearLayout>
 
-
         </LinearLayout>
-
 
     </LinearLayout>
 

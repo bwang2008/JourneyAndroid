@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JourneyAndroid</string>
+    <string name="item_image">item Image</string>
 </resources>
