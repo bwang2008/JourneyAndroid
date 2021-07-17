@@ -3,6 +3,7 @@ package com.bwang.journeyandroid
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bwang.journeyandroid.data.JourneyDTOItem
@@ -16,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://jsonplaceholder.typicode.com"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity(), JourneyListAdaptor.OnItemClickListner {
 
     companion object {
         private val TAG: String = MainActivity::class.java.simpleName
@@ -30,10 +31,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        recyclerListView= findViewById(R.id.recyclerList)
+        recyclerListView = findViewById(R.id.recyclerList)
         recyclerListView.setHasFixedSize(true)
         linearLayoutManager = LinearLayoutManager(this)
         recyclerListView.layoutManager = linearLayoutManager
+
+        //TODO need to be fixed
+//        var journeyList: List<JourneyDTOItem> = listOf()
+        journeyListAdaptor = JourneyListAdaptor(baseContext, listOf(), this)
 
         getJourneyList()
     }
@@ -54,7 +59,11 @@ class MainActivity : AppCompatActivity() {
                 response: Response<List<JourneyDTOItem>?>
             ) {
                 val responseBody = response.body()!!
-                journeyListAdaptor = JourneyListAdaptor(baseContext, responseBody)
+                //TODO in Retrofit enqueue can not refer to this MainActivity
+//                journeyListAdaptor = JourneyListAdaptor(baseContext, responseBody, this)
+                with(journeyListAdaptor){
+                    journeyList = responseBody
+                }
                 journeyListAdaptor.notifyDataSetChanged()
                 recyclerListView.adapter = journeyListAdaptor
                 d(TAG, "successfully got response")
@@ -74,7 +83,13 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<JourneyDTOItem>?>, t: Throwable) {
                 d(TAG, "onFailure: " + t.message)
             }
+
         })
+    }
+
+    override fun onItemClick(journeyDTOItem: JourneyDTOItem, position: Int) {
+//        Toast.makeText(this, journeyDTOItem.title, Toast.LENGTH_SHORT).show()
+        d(TAG, "Clicked: ${journeyDTOItem.title}")
     }
 
 }

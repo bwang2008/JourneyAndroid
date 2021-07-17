@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bwang.journeyandroid.R
 import com.bwang.journeyandroid.data.JourneyDTOItem
+import retrofit2.Callback
 
-class JourneyListAdaptor(val context: Context, val journeyList: List<JourneyDTOItem>):
+class JourneyListAdaptor(val context: Context, var journeyList: List<JourneyDTOItem>, val onItemClickListner: OnItemClickListner):
     RecyclerView.Adapter<JourneyListAdaptor.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -20,6 +21,14 @@ class JourneyListAdaptor(val context: Context, val journeyList: List<JourneyDTOI
             userId = itemView.findViewById(R.id.userId)
             title = itemView.findViewById(R.id.title)
         }
+
+        fun initViewHolder(journeyDTOItem: JourneyDTOItem, clickListner: OnItemClickListner){
+            userId.text = journeyDTOItem.userId.toString()
+            title.text = journeyDTOItem.title
+            itemView.setOnClickListener{
+                clickListner.onItemClick(journeyDTOItem, adapterPosition)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,11 +37,18 @@ class JourneyListAdaptor(val context: Context, val journeyList: List<JourneyDTOI
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.userId.text = journeyList[position].userId.toString()
-        holder.title.text = journeyList[position].title
+//        holder.userId.text = journeyList[position].userId.toString()
+//        holder.title.text = journeyList[position].title
+
+        holder.initViewHolder(journeyList[position], onItemClickListner)
     }
 
     override fun getItemCount(): Int {
         return journeyList.size
     }
+
+    interface OnItemClickListner{
+        fun onItemClick(journeyDTOItem: JourneyDTOItem, position: Int)
+    }
 }
+
