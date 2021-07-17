@@ -15,13 +15,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://jsonplaceholder.typicode.com"
-const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private val TAG: String = MainActivity::class.java.simpleName
+    }
+
     lateinit var recyclerListView: RecyclerView
     lateinit var journeyListAdaptor: JourneyListAdaptor
-    lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit private var linearLayoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         val journeyData = retrofitBuilder.getJourney()
 
-        journeyData.enqueue(object : Callback<List<JourneyDTOItem>?> {
+        journeyData.enqueue(object: Callback<List<JourneyDTOItem>?> {
+
             override fun onResponse(
                 call: Call<List<JourneyDTOItem>?>,
                 response: Response<List<JourneyDTOItem>?>
@@ -53,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 journeyListAdaptor = JourneyListAdaptor(baseContext, responseBody)
                 journeyListAdaptor.notifyDataSetChanged()
                 recyclerListView.adapter = journeyListAdaptor
+                d(TAG, "successfully got response")
 
 //                val stringBuilder = StringBuilder()
 //                for (data in responseBody) {
