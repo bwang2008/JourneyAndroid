@@ -10,7 +10,8 @@ import com.bwang.journeyandroid.R
 import com.bwang.journeyandroid.data.JourneyDTOItem
 import retrofit2.Callback
 
-class JourneyListAdaptor(val context: Context, var journeyList: List<JourneyDTOItem>, val onItemClickListner: OnItemClickListner):
+class JourneyListAdaptor(val context: Context, var journeyList: List<JourneyDTOItem>,
+                         val onItemClickListner: OnItemClickListner):
     RecyclerView.Adapter<JourneyListAdaptor.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
